@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+  <script>
+    const ws = new WebSocket("wss://${YOUR-WEB-SOCKET-ENDPOINT}")
+    ws.onopen = function (e) {
+      console.log(e)
+    }
+
+    ws.onmessage = function (e) {
+      const data = JSON.parse((e.data))
+      document.getElementById("board").textContent = data.message
+    }
+
+    window.onload = function() {
+      document.getElementById("send_message").onclick = function (e) {
+        const message = {
+          "action": "actionRoute",
+          "service": "serviceRoute",
+          "data": {
+            "parameter": "aabbcc"
+          }
+        }
+
+        ws.send(JSON.stringify(message))
+      }
+    }
+
+  </script>
+
+</head>
+<body>
+  <button id="send_message">送信</button>
+  <div>
+    <pre id="board"></pre>
+  </div>
+</body>
+</html>
