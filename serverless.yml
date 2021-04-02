@@ -8,7 +8,7 @@ provider:
   websocketsApiRouteSelectionExpression: $request.body.action
 
 functions:
-  coonectHandler:
+  connectHandler:
     handler: handler.connect_handler
     events:
       - websocket: $connect
